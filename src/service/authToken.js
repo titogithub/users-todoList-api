@@ -4,17 +4,7 @@ const { createToken } = require('./JWTHandler');
 const requireAuthentication = (request) => {
   const route = `${request.method} ${request.baseUrl}${request._parsedUrl.pathname}`;
   //add routes to be interceptable
-  const authenticationList = [
-    'GET /api/users/getUsersProfiles',
-    'GET /api/users/getUser',
-    'PUT /api/users/updateUser',
-    'POST /api/users/uploadPicture',
-    'POST /api/users/uploadCv',
-    'GET /api/listings',
-    'PUT /api/listings',
-    'POST /api/jobs/postJob',
-    'POST /api/jobs/apply',
-  ];
+  const authenticationList = ['GET /api/users/getUsersProfiles'];
 
   return authenticationList.find((element) => route.includes(element));
 };

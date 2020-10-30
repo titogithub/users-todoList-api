@@ -1,6 +1,7 @@
 var express = require('express'),
   router = express.Router(),
-  userController = require('../controller/userController');
+  userController = require('../controller/userController'),
+  isAuth = require('../service/authToken');
 
 module.exports = (app) => {
   // Check service health
@@ -11,6 +12,7 @@ module.exports = (app) => {
     });
   });
 
+  app.use(isAuth);
   router.route('/user').get(userController.get);
   router.route('/user').post(userController.post);
 
