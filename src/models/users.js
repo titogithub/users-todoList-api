@@ -1,9 +1,7 @@
-const bcrypt = require('bcrypt');
+const cryptoHandler = require('../service/cryptoHandler');
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
-
-const saltRounds = 10;
 
 const users = new Schema(
   {
@@ -17,21 +15,21 @@ const users = new Schema(
       required: true,
       private: false,
     },
-    description: {
-      type: String,
-      private: false,
-      maxlength: 165,
-    },
     lastName: {
       type: String,
       required: true,
       private: false,
     },
+    description: {
+      type: String,
+      private: false,
+      maxlength: 165,
+    },
     age: {
       type: Number,
       private: false,
     },
-    nickname: {
+    nickName: {
       type: String,
       required: false,
       private: false,
@@ -119,7 +117,7 @@ const users = new Schema(
 
 // hash user password before saving into database
 users.pre('save', function (next) {
-  this.password = bcrypt.hashSync(this.password, saltRounds);
+  this.password = cryptoHandler.encrypt(this.password);
   next();
 });
 

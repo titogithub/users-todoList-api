@@ -3,6 +3,8 @@ var path = require('path'),
   morgan = require('morgan'),
   methodOverride = require('method-override'),
   routes = require('../router/userRouter');
+const httpResponseHandler = require('../service/httpResponseHandler');
+require('../config/mongoose');
 
 module.exports = (app) => {
   app.use(morgan('dev'));
@@ -12,6 +14,7 @@ module.exports = (app) => {
   routes(app);
   app.use((err, req, res, next) => {
     console.error(err.stack);
+    return httpResponseHandler.sendInternalError(res);
   });
   return app;
 };

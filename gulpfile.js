@@ -8,6 +8,12 @@ gulp.task('start', () => {
     env: {
       ENV: 'DEV',
       PORT: 8081,
+      ENCRIPTATION_KEY: 'titito_key',
+      TOKEN_KEY: 'titito_token',
+      TOKEN_REFRESH: '3600',
+      MONGODB_URL:
+        'mongodb+srv://titomongo:titomongo@cluster0.np6ai.mongodb.net/todoDB?retryWrites=true&w=majority',
+      TOKEN_LIFE: '24h',
     },
   });
 
