@@ -15,6 +15,7 @@ module.exports = (app) => {
   app.use(isAuth);
   router.route('/user').get(userController.get);
   router.route('/user').post(userController.post);
+  router.route('/login').post(userController.login);
 
   app.use('/api/', router);
 };
